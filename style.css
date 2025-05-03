@@ -1,0 +1,280 @@
+/* --- Переменные --- */
+:root {
+	--bg-color-light: #f8f9fa;
+	--text-color-light: #212529;
+	--border-color-light: #dee2e6;
+	--primary-color-light: #007bff;
+	--highlight-bg-light: #a6ffab; /* Зеленоватый */
+	--highlight-text-light: #005005;
+	--sidebar-bg-light: #e9ecef;
+	--input-bg-light: #fff;
+	--btn-bg-light: #007bff;
+	--btn-text-light: #fff;
+	--btn-hover-bg-light: #0056b3;
+
+	--bg-color-dark: #212529;
+	--text-color-dark: #f8f9fa;
+	--border-color-dark: #495057;
+	--primary-color-dark: #0d6efd; /* Немного ярче синий для темной темы */
+	--highlight-bg-dark: #008f11; /* Темно-зеленый */
+	--highlight-text-dark: #e2ffe5;
+	--sidebar-bg-dark: #343a40;
+	--input-bg-dark: #495057;
+	--btn-bg-dark: #0d6efd;
+	--btn-text-dark: #fff;
+	--btn-hover-bg-dark: #0b5ed7;
+
+	/* Текущие цвета (по умолчанию светлые) */
+	--bg-color: var(--bg-color-light);
+	--text-color: var(--text-color-light);
+	--border-color: var(--border-color-light);
+	--primary-color: var(--primary-color-light);
+	--highlight-bg: var(--highlight-bg-light);
+	--highlight-text: var(--highlight-text-light);
+	--sidebar-bg: var(--sidebar-bg-light);
+	--input-bg: var(--input-bg-light);
+	--btn-bg: var(--btn-bg-light);
+	--btn-text: var(--btn-text-light);
+	--btn-hover-bg: var(--btn-hover-bg-light);
+}
+
+body.dark-theme {
+	--bg-color: var(--bg-color-dark);
+	--text-color: var(--text-color-dark);
+	--border-color: var(--border-color-dark);
+	--primary-color: var(--primary-color-dark);
+	--highlight-bg: var(--highlight-bg-dark);
+	--highlight-text: var(--highlight-text-dark);
+	--sidebar-bg: var(--sidebar-bg-dark);
+	--input-bg: var(--input-bg-dark);
+	--btn-bg: var(--btn-bg-dark);
+	--btn-text: var(--btn-text-dark);
+	--btn-hover-bg: var(--btn-hover-bg-dark);
+}
+
+/* --- Общие стили --- */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	line-height: 1.6;
+	display: flex;
+	min-height: 100vh;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+	display: flex;
+	width: 100%;
+}
+
+/* --- Боковая панель (Sidebar) --- */
+.sidebar {
+	width: 280px;
+	background-color: var(--sidebar-bg);
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	border-right: 1px solid var(--border-color);
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	height: 100vh; /* Занимает всю высоту */
+	position: sticky; /* Делает сайдбар "липким" */
+	top: 0;
+	overflow-y: auto; /* Добавляет прокрутку, если контент не влезает */
+}
+
+.logo {
+	color: var(--primary-color);
+	text-align: center;
+	margin-bottom: 30px;
+	font-size: 1.8em;
+}
+
+.sidebar-section {
+	margin-bottom: 25px;
+}
+
+.sidebar-section h2 {
+	font-size: 1.1em;
+	margin-bottom: 10px;
+	border-bottom: 1px solid var(--border-color);
+	padding-bottom: 5px;
+	display: flex;
+	align-items: center;
+	gap: 8px; /* Расстояние между иконкой и текстом */
+}
+
+.sidebar-section h2 i {
+	color: var(--primary-color);
+}
+
+#search-input {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid var(--border-color);
+	background-color: var(--input-bg);
+	color: var(--text-color);
+	border-radius: 4px;
+	margin-bottom: 10px;
+	transition: background-color 0.3s ease, border-color 0.3s ease,
+		color 0.3s ease;
+}
+
+.search-options label {
+	display: block;
+	margin-bottom: 5px;
+	font-size: 0.9em;
+	cursor: pointer;
+}
+.search-options input[type='radio'],
+.search-options input[type='checkbox'] {
+	margin-right: 5px;
+	vertical-align: middle; /* Выравнивание с текстом */
+}
+
+.btn {
+	display: inline-block;
+	background-color: var(--btn-bg);
+	color: var(--btn-text);
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.2s ease;
+	font-size: 1em;
+	margin-top: 5px; /* Небольшой отступ сверху */
+}
+
+.btn i {
+	margin-right: 5px; /* Расстояние справа от иконки */
+}
+
+.btn:hover:not(:disabled) {
+	background-color: var(--btn-hover-bg);
+}
+
+.btn:disabled {
+	background-color: #6c757d; /* Серый для неактивных кнопок */
+	cursor: not-allowed;
+	opacity: 0.7;
+}
+
+#match-list {
+	list-style: none;
+	padding: 0;
+	max-height: 200px; /* Ограничение высоты списка совпадений */
+	overflow-y: auto;
+	font-size: 0.9em;
+}
+
+#match-list li {
+	padding: 8px 5px;
+	border-bottom: 1px dashed var(--border-color);
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	overflow: hidden; /* Обрезает текст, выходящий за пределы */
+	text-overflow: ellipsis; /* Добавляет многоточие */
+	white-space: nowrap; /* Запрещает перенос текста */
+}
+
+#match-list li:last-child {
+	border-bottom: none;
+}
+
+#match-list li:hover {
+	background-color: rgba(0, 123, 255, 0.1); /* Легкий фон при наведении */
+}
+
+#match-list li mark {
+	/* Стиль для подсвеченной части в списке */
+	background-color: var(--highlight-bg);
+	color: var(--highlight-text);
+	padding: 0 2px;
+	border-radius: 2px;
+}
+
+.history-controls {
+	display: flex;
+	gap: 10px; /* Расстояние между кнопками истории */
+}
+
+.theme-switcher {
+	margin-top: auto; /* Прижимает блок темы к низу */
+}
+
+/* --- Основной контент --- */
+.main-content {
+	flex-grow: 1; /* Занимает оставшееся пространство */
+	padding: 20px;
+	height: 100vh; /* Занимает всю высоту */
+	display: flex; /* Используем flex для управления редактором */
+	flex-direction: column;
+}
+
+#editor-container {
+	flex-grow: 1; /* Позволяет контейнеру редактора расти */
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+	overflow: hidden; /* Чтобы внутренний div не вылезал */
+	background-color: var(--input-bg); /* Фон как у инпута */
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	display: flex; /* Делаем контейнер flex-контейнером */
+}
+
+#text-editor {
+	flex-grow: 1; /* Редактор занимает все место в контейнере */
+	padding: 15px;
+	font-size: 1rem; /* Размер шрифта как у обычного текста */
+	line-height: 1.7; /* Увеличенный межстрочный интервал для читаемости */
+	font-family: 'Courier New', Courier, monospace; /* Моноширинный шрифт для текста */
+	outline: none; /* Убираем стандартный контур при фокусе */
+	color: var(--text-color);
+	white-space: pre-wrap; /* Сохраняет пробелы и переносы строк */
+	overflow-y: auto; /* Добавляет прокрутку при необходимости */
+	height: 100%; /* Занимает всю высоту контейнера */
+	min-height: 300px; /* Минимальная высота */
+}
+
+/* Placeholder для contenteditable div */
+#text-editor:empty:before {
+	content: attr(placeholder);
+	color: #6c757d; /* Цвет плейсхолдера */
+	pointer-events: none; /* Чтобы плейсхолдер не мешал кликам */
+	display: block; /* Needed for placeholder */
+}
+
+/* --- Стили подсветки --- */
+.highlight {
+	background-color: var(--highlight-bg);
+	color: var(--highlight-text); /* Добавим цвет текста для контраста */
+	border-radius: 3px;
+	padding: 0 2px;
+	font-weight: bold; /* Выделим жирным */
+}
+
+/* --- Адаптивность (простой пример) --- */
+@media (max-width: 768px) {
+	.container {
+		flex-direction: column;
+	}
+	.sidebar {
+		width: 100%;
+		height: auto; /* Автоматическая высота на мобильных */
+		position: static; /* Убираем sticky */
+		border-right: none;
+		border-bottom: 1px solid var(--border-color);
+	}
+	.main-content {
+		height: auto; /* Автоматическая высота */
+	}
+	.theme-switcher {
+		margin-top: 25px; /* Возвращаем обычный отступ */
+	}
+}
